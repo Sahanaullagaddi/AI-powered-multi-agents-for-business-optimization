@@ -8,6 +8,8 @@ load_dotenv()
 
 # Attempt connection to DATABASE_URL; fallback to SQLite if unreachable
 DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///./medguard.db")
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 def create_resilient_engine():
     global DATABASE_URL

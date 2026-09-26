@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { FileUp, Mic, Send, Trash2, X } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
+import { API_BASE_URL } from "@/lib/api";
 
 type Role = "user" | "ai";
 
@@ -94,7 +95,7 @@ export default function Chatbot() {
       // Send the entire chat history up to now, plus the user's new message
       const historyToSend = messages.map(m => ({ role: m.role, content: m.content })).concat([{ role: "user", content: t }]);
 
-      const res = await fetch("http://localhost:8000/chat", {
+      const res = await fetch(`${API_BASE_URL}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: historyToSend })

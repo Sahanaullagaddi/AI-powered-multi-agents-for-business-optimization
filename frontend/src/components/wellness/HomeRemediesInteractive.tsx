@@ -530,7 +530,7 @@ export default function HomeRemediesInteractive({ onBack }: { onBack: () => void
     setAiAdvice(null);
 
     try {
-      const res = await fetch("http://localhost:8000/chat", {
+      const res = await fetch(`${API_BASE_URL}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
